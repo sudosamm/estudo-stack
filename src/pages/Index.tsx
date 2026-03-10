@@ -1,7 +1,7 @@
 const Index = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
+      <div className="text-center bg-muted p-8 rounded-2xl max-block-fit">
         <h1 className="text-4xl font-bold text-foreground mb-4">
           Meu Projeto
         </h1>
