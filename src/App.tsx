@@ -6,8 +6,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { AuthProvider } from "@/contexts/AuthContext";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import Index from "@/pages/Index";
+import NotFound from "@/pages/NotFound";
+import LoginPage from '@/pages/LoginPage';
 import './App.css'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
