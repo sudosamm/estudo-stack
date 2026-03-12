@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription,CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -21,7 +21,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     // Login com email e senha!
-    const handleSignIn = async (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault(); // Previne recarregamento da página
         setIsLoading(true); // Ativa o estado de loading
         try {
@@ -72,12 +72,109 @@ const LoginPage = () => {
                 </CardHeader>
                 <CardContent>
                     {/* Tabs para login / cadastro */}
-                    <Tabs defaultValue="login" className="w-full">
-                        <TabsList className="grid w-full grid-cols-2 mb-4 p-">
+                    <Tabs defaultValue="login" className="w-full ">
+                        <TabsList className="grid place-self-center min-h-fit w-full grid-cols-2 space-x-2 mb-4 p-2 ">
                             <TabsTrigger value="login">Login</TabsTrigger>
                             <TabsTrigger value="signup">Cadastro</TabsTrigger>
                         </TabsList>
+                        {/* Conteúdo do tab de login */}
+                        <TabsContent value="login">
+                            <form onSubmit={handleLogin} className="space-y-4">
+                                <div className='space-y-2'>
+                                    <Label htmlFor='login-email'>Email</Label>
+                                    <Input
+                                        id='login-email'
+                                        type='email'
+                                        placeholder='seu@email.com'
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required // Validação HTML5 para campo obrigatório
+                                    />
+                                </div>
+                                <div className='space-y-2'>
+                                    <Label htmlFor='login-password'>Senha</Label>
+                                    <Input
+                                        id='login-password'
+                                        type='password'
+                                        placeholder='********'
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required // Validação HTML5 para campo obrigatório
+                                    />
+                                </div>
+                                <Button type='submit' className='place-self-center w-full' disabled={isLoading}>
+                                    {isLoading ? "Entrando..." : "Entrar"}
+                                </Button>
+                                {/* Link para reset de senha */}
+                                <p className='text-center text-sm text-muted-foreground'>
+                                    <button
+                                        type='button'
+                                        onClick={() => navigate("/forgot-password")}
+                                        className='text-sm text-primary hover:underline'
+                                    >
+                                        Esqueceu sua senha?
+                                    </button>
+                                </p>
+                            </form>
+                        </TabsContent>
+                        {/* Conteúdo do tab de cadastro */}
+                        <TabsContent value="signup">
+                            <form onSubmit={handleSignUp} className="space-y-4">
+                                <div className='space-y-2'>
+                                    <Label htmlFor='signup-email'>Email</Label>
+                                    <Input
+                                        id='signup-email'
+                                        type='email'
+                                        placeholder='seu@email.com'
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required // Validação HTML5 para campo obrigatório
+                                    />
+                                </div>
+                                <div className='space-y-2'>
+                                    <Label htmlFor='signup-password'>Senha</Label>
+                                    <Input
+                                        id='signup-password'
+                                        type='password'
+                                        placeholder='********'
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required // Validação HTML5 para campo obrigatório
+                                        minLength={8}
+                                    />
+                                </div>
+                                <Button type='submit' className='place-self-center w-full' disabled={isLoading}>
+                                    {isLoading ? "Cadastrando..." : "Criar conta"}
+                                </Button>
+                            </form>
+                        </TabsContent>
                     </Tabs>
+                    {/* Separador */}
+                    <div className="relative my-6">
+                        <div className="absolute inset-0 flex items-center">
+                            <span className="w-full border-t border-border" />
+                        </div>
+                        <div className="relative flex justify-center text-xs uppercase">
+                            <span className="bg-card px-2 text-muted-foreground">
+                                Ou continue com
+                            </span>
+                        </div>
+                    </div>
+                    {/* Botões de login com OAuth */}
+                    <div className="grid grid-cols-2 gap-3">
+                        <Button
+                            variant="outline"
+                            onClick={() => handleOAuthSignIn("discord")}
+                        >
+                            Discord
+                        </Button>
+                        <Button
+                            variant="outline"
+                            onClick={() => handleOAuthSignIn("google")}
+                        >
+                            Google
+                        </Button>
+                    </div>
                 </CardContent>
             </Card>
         </div>

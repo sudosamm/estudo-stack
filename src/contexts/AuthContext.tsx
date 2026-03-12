@@ -72,7 +72,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     // Login com email e senha
     const signIn = async (email: string, password: string) => {
-        setIsLoading(true);
         const { error } = await supabase.auth.signInWithPassword({ 
             email, 
             password 
@@ -85,7 +84,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     
     // Registro com email e senha
     const signUp = async (email: string, password: string) => {
-        setIsLoading(true);
         const { error } = await supabase.auth.signUp({ 
             email, 
             password,

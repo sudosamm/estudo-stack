@@ -27,6 +27,15 @@ const Index = () => {
           >
             Docs do shadcn
           </a>
+          
+          <a
+            href="/login"
+            rel="noopener noreferrer"
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md 
+                       hover:bg-primary/90 transition-colors"
+          >
+            Página de login
+          </a>
         </div>
       </div>
     </div>
